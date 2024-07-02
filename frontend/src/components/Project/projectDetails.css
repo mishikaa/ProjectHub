@@ -1,0 +1,126 @@
+.project-card-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap to the next line */
+  justify-content: space-between; /* Spaces cards out evenly */
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  flex: 1 1 calc(50% - 20px); /* Ensure cards take up at least 50% of the container, minus margins */
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+.status {
+  background: #d4edda;
+  color: #155724;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.project-description {
+  margin: 10px 0;
+  color: #333;
+}
+
+.project-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.deadline {
+  color: #ff0000;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.team-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.team-count {
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.issues {
+  color: #6c757d;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .project-card {
+    flex: 1 1 calc(100% - 20px); /* Make cards full-width on smaller screens */
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-btn {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination-btn.active {
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+.pagination-btn:disabled {
+  cursor: not-allowed;
+  color: #ccc;
+}

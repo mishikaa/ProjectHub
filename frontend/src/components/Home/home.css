@@ -1,0 +1,110 @@
+/* HEADER */
+.header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #111;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      
+      .nav {
+        display: flex;
+        gap: 20px;
+      }
+      
+      .nav a {
+        color: #fff;
+        text-decoration: none;
+      }
+      
+      .nav a.login {
+        color: #fff;
+      }
+      
+      .nav a.signup {
+        color: #000;
+        background-color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+      
+      /* Hero */
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+        background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+        text-align: center;
+      }
+      
+      .hero-content {
+        max-width: 600px;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+      
+      .cta-button {
+        padding: 15px 30px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #ff007f;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      .cta-button:hover {
+        background-color: #ff3366;
+      }
+      
+/* Features */
+.features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 40px;
+        background-color: #111;
+      }
+      
+      .feature {
+        background-color: #222;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: left;
+      }
+      
+      .feature h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      
+      .feature p {
+        font-size: 1rem;
+        color: #ccc;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 20px;
+        background-color: #111;
+        text-align: center;
+      }
+      
+      .footer p {
+        margin: 5px 0;
+      }
+      

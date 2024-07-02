@@ -1,0 +1,17 @@
+/* Projects.css */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px;
+}
+
+.projectDetails .header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-section .create-btn  { 
+  padding: 12px 20px;
+  border-radius: 8px
+}

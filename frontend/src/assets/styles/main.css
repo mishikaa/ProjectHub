@@ -1,0 +1,64 @@
+/* styles.css */
+
+/* Header styles */
+header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      
+      /* Navigation styles */
+      nav {
+        background-color: #f4f4f4;
+        padding: 10px;
+      }
+      
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      
+      nav ul li {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      
+      nav ul li a {
+        color: #333;
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+      }
+      
+      nav ul li a:hover {
+        background-color: #333;
+        color: #fff;
+      }
+
+/* Main styles */
+main {
+
+ padding: 20px;
+}
+
+.projects, .tasks {
+  margin-bottom: 20px;
+}
+
+.projects h2, .tasks h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+  /* Adjust the layout for larger screens */
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+}
