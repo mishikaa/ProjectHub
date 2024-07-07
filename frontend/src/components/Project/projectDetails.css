@@ -15,8 +15,8 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 10px;
+  /* padding: 20px; */
+  /* margin: 10px; */
   flex: 1 1 calc(50% - 20px); /* Ensure cards take up at least 50% of the container, minus margins */
   box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
 }
@@ -88,9 +88,15 @@
 }
 
 /* Responsive styling */
+@media (max-width: 1200px) {
+  .project-card {
+    flex: 1 1 calc(50% - 20px); /* Two cards per row on medium screens */
+  }
+}
+
 @media (max-width: 768px) {
   .project-card {
-    flex: 1 1 calc(100% - 20px); /* Make cards full-width on smaller screens */
+    flex: 1 1 calc(100% - 20px); /* One card per row on small screens */
   }
 }
 
@@ -123,4 +129,17 @@
 .pagination-btn:disabled {
   cursor: not-allowed;
   color: #ccc;
+}
+
+a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from parent */
+}
+
+/* If you have specific links inside ProjectCard that need different styles, use more specific selectors */
+.project-card a {
+  /* Specific link styles inside ProjectCard */
+  /* Example styles */
+  color: #007bff; /* Link color */
+  text-decoration: underline; /* Underline on hover or as needed */
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './CreateProject.css';
-import { createProject } from '../../services/projectServices';
+import { createProject } from '../../services/projectServices'; // Assuming projectServices handles API calls
+import { toast, ToastContainer } from 'react-toastify';
 
 const CreateProject = () => {
   const [users, setUsers] = useState([]);
@@ -53,18 +54,21 @@ const CreateProject = () => {
     e.preventDefault();
     try {
       const newProject = await createProject(formData);
-      console.log('Project created successfully', newProject);
+      toast.success('Project created successfully!');
       // Optionally, you can reset the form or redirect the user after a successful creation
     } catch (error) {
+      toast.error('Error creating project');
       console.error('Error creating project', error);
     }
   };
 
   return (
     <div className='createProject'>
-      <h2>Projects / Create Project</h2>
+      <ToastContainer />
+      <h2 className='heading'>Create Project</h2>
       <div className="project-form">
         <form onSubmit={handleSubmit}>
+          {/* Project creation form */}
           <div className="form-group">
             <label>Project Title</label>
             <input
@@ -142,7 +146,7 @@ const CreateProject = () => {
                   <option value="" disabled>Select Role</option>
                   <option value="ADMIN">Admin</option>
                   <option value="PROJECT_MANAGER">Project Manager</option>
-                  <option value="TEAM_LEAD">Team lead</option>
+                  <option value="TEAM_LEAD">Team Lead</option>
                   <option value="DEVELOPER">Developer</option>
                   <option value="TESTER">Tester</option>
                 </select>
@@ -156,7 +160,7 @@ const CreateProject = () => {
             </button>
           </div>
           <div className="form-actions">
-            <button type="submit" className="create-btn">Create</button>
+            <button type="submit" className="create-btn">Create Project</button>
           </div>
         </form>
       </div>

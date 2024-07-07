@@ -29,7 +29,8 @@ const TaskSchema = new Schema({
     default: 'Not Started'
   },
   assignedTo: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'User', // Reference to User model if assigning to users
     required: false
   },
   createdAt: {

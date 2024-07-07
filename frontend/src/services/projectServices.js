@@ -1,14 +1,13 @@
-// src/services/projectService.js
-
 const API_URL = 'http://localhost:3000/projects';
+const TASKS_API_URL = 'http://localhost:3000/tasks'; // Assuming tasks endpoint
 
+// Project Services
 export const getProjects = async () => {
   try {
     const response = await fetch(API_URL);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-//     console.log(response)
     return await response.json();
   } catch (error) {
     console.error('Error fetching projects', error);
@@ -16,7 +15,7 @@ export const getProjects = async () => {
   }
 };
 
-export const getProject = async (id) => {
+export const getProjectById = async (id) => {
   try {
     const response = await fetch(`${API_URL}/${id}`);
     if (!response.ok) {
@@ -77,6 +76,72 @@ export const deleteProject = async (id) => {
     }
   } catch (error) {
     console.error('Error deleting project', error);
+    throw error;
+  }
+};
+
+// Task Services
+export const getTasks = async (projectId) => {
+  try {
+    const response = await fetch(`${TASKS_API_URL}?projectId=${projectId}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching tasks', error);
+    throw error;
+  }
+};
+
+export const createTask = async (task) => {
+  try {
+    const response = await fetch(TASKS_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error creating task', error);
+    throw error;
+  }
+};
+
+export const updateTask = async (id, task) => {
+  try {
+    const response = await fetch(`${TASKS_API_URL}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating task', error);
+    throw error;
+  }
+};
+
+export const deleteTask = async (id) => {
+  try {
+    const response = await fetch(`${TASKS_API_URL}/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.error('Error deleting task', error);
     throw error;
   }
 };

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 import ProjectCard from './ProjectCard';
 import { getProjects } from '../../services/projectServices';
 import './projectDetails.css'; // Note the change to this CSS file
@@ -7,7 +8,7 @@ const ProjectDetails = ({ onCreateProject }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = window.innerWidth < 768 ? 1 : 2;
+  const projectsPerPage = window.innerWidth < 768 ? 3 : 4; // Adjusted for smaller screens
 
   const totalPages = Math.ceil(projects.length / projectsPerPage);
 
@@ -50,15 +51,16 @@ const ProjectDetails = ({ onCreateProject }) => {
         <>
           <section className="project-card-container">
             {currentProjects.map((project) => (
-              <ProjectCard
-                key={project._id}
-                title={project.title}
-                projectType={project.projectType}
-                startDate={project.startDate}
-                endDate={project.endDate}
-                description={project.description}
-                projectRoles={project.projectRoles}
-              />
+              <Link key={project._id} to={`/projects/${project._id}`} className="project-card">
+                <ProjectCard
+                  title={project.title}
+                  projectType={project.projectType}
+                  startDate={project.startDate}
+                  endDate={project.endDate}
+                  description={project.description}
+                  projectRoles={project.projectRoles}
+                />
+              </Link>
             ))}
           </section>
           <div className="pagination">

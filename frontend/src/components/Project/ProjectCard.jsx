@@ -1,14 +1,14 @@
 import React from 'react';
 import './ProjectCard.css';
 
-const ProjectCard = ({ title, projectType, startDate, endDate, description, projectRoles = [] }) => {
+const ProjectCard = ({ title, projectType, startDate, endDate, description, projectRoles = [], onClick }) => {
   const formatDate = (date) => {
     const parsedDate = new Date(date);
     return isNaN(parsedDate) ? 'Invalid Date' : parsedDate.toLocaleDateString();
   };
 
   return (
-    <div className="project-card">
+    <div className="project-card" onClick={onClick}>
       <div className="project-header">
         <h3>{title}</h3>
         <span className="status">{projectType}</span>

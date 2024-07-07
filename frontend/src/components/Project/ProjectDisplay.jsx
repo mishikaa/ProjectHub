@@ -3,7 +3,7 @@ import ProjectCard from './ProjectCard';
 import './ProjectDisplay.css';
 
 const ProjectsDisplay = ({ projects }) => {
-  console.log('Projects being passed to ProjectCard:', projects); // Log the projects being passed
+  // console.log('Projects being passed to ProjectCard:', projects); // Log the projects being passed
   return (
     <div className="projects-container">
       {projects.map((project) => (

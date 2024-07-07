@@ -4,6 +4,7 @@ const { default: mongoose } = require('mongoose');
 const router = new Router();
 
 const Project = mongoose.model('project');
+const Task = require('../models/Task'); // Adjust the path as needed
 
 // Create a new project
 router.post('/', async (req, res) => {
@@ -43,11 +44,26 @@ router.get('/', async (req, res) => {
   }
 });
       
+// Get all tasks for a given project
+router.get('/:projectId/tasks', async (req, res) => {
+  try {
+    const tasks = await Task.find({ projectId: req.params.projectId });
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Get a specific project
 router.get('/:id', async (req, res) => {
   try {
-    const project = await Project.findById(req.params.id).populate('tasks');
+    const project = await Project.findById(req.params.id)
+    .populate('tasks')
+    .populate({
+      path: 'projectRoles.member',
+      model: 'users',
+      select: 'firstName lastName displayName image' // Select the fields you want to populate for members
+    });
     if (!project) return res.status(404).json({ message: 'Project not found' });
     res.json(project);
   } catch (err) {
