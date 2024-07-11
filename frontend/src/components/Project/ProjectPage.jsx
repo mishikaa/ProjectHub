@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProjectById, createTask, updateTask, deleteTask, updateProject, deleteProject } from '../../services/projectServices';
+import { getProjectById, createTask, updateTask, deleteTask, updateProject, deleteProject, uploadFile, deleteFile } from '../../services/projectServices'; // Import deleteFile function
 import './projectPage.css';
 import TaskCard from '../Task/TaskCard';
 import Navbar from '../Dashboard/Navbar';
 import { toast } from 'react-toastify';
+import { useDropzone } from 'react-dropzone';
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const ProjectPage = () => {
     projectId: id
   });
   const [showTaskForm, setShowTaskForm] = useState(false);
+  const [files, setFiles] = useState([]);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -120,6 +122,46 @@ const ProjectPage = () => {
   const toggleTaskForm = () => {
     setShowTaskForm(!showTaskForm);
   };
+
+  const onDrop = (acceptedFiles) => {
+    console.log('Files dropped:', acceptedFiles);
+    setFiles(acceptedFiles);
+  };
+
+  const handleFileUpload = async () => {
+    console.log('Files to upload:', files);
+    if (files.length === 0) {
+      toast.error('Please select a file to upload');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', files[0]);
+
+    try {
+      const response = await uploadFile(id, formData);
+      setProject({ ...project, attachments: [...project.attachments, response.data.location] });
+      toast.success('File uploaded successfully');
+      setFiles([]);
+    } catch (error) {
+      console.error('Error uploading file', error);
+      toast.error('Failed to upload file');
+    }
+  };
+
+  const handleFileDelete = async (fileUrl) => {
+    try {
+      await deleteFile(id, fileUrl); // Implement deleteFile function in projectServices
+      const updatedAttachments = project.attachments.filter((file) => file !== fileUrl);
+      setProject({ ...project, attachments: updatedAttachments });
+      toast.success('File deleted successfully');
+    } catch (error) {
+      console.error('Error deleting file', error);
+      toast.error('Failed to delete file');
+    }
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
     <>
@@ -248,6 +290,22 @@ const ProjectPage = () => {
                 )}
               </>
             )}
+            <div className="file-upload-section">
+              <h3>File Upload</h3>
+              <div {...getRootProps({ className: 'dropzone' })}>
+                <input {...getInputProps()} />
+                <p>Drag 'n' drop some files here, or click to select files</p>
+              </div>
+              <button onClick={handleFileUpload} className="upload-btn">Upload File</button>
+              <ul>
+                {project.attachments && project.attachments.map((file, index) => (
+                  <li key={index}>
+                    <a href={file} target="_blank" rel="noopener noreferrer">{file.split('/').pop()}</a>
+                    <button onClick={() => handleFileDelete(file)}>Delete</button> {/* Add delete functionality */}
+                  </li>
+                ))}
+              </ul>
+            </div>
             {(user.role === 'ADMIN' || user.role === 'PROJECT_MANAGER') && (
               <div className="project-actions">
                 <h3>Project Management</h3>

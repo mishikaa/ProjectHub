@@ -1,0 +1,31 @@
+.projects {
+        padding: 20px;
+      }
+      
+      .project-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .project {
+        text-align: center;
+      }
+      
+      .project img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+      }
+      
+      @media (max-width: 768px) {
+        .project-list {
+          justify-content: center;
+        }
+      
+        .project img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      

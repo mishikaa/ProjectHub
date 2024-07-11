@@ -1,6 +1,15 @@
 const {Router} = require('express');
 const { default: mongoose } = require('mongoose');
 
+const path = require('path');
+
+const multer = require('multer');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { Upload } = require('@aws-sdk/lib-storage');
+
+const s3 = require('../config/awsConfig');
+
+// const upload = multer({ dest: 'uploads/' });
 const router = new Router();
 
 const Project = mongoose.model('project');
@@ -16,7 +25,8 @@ router.post('/', async (req, res) => {
     status: req.body.status,
     projectType: req.body.projectType,
     projectRoles: req.body.projectRoles,
-    tasks: req.body.tasks
+    tasks: req.body.tasks,
+    attachments: req.file ? req.file.location : null // Storing the file URL
   });
 
   try {
@@ -43,7 +53,8 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-      
+
+
 // Get all tasks for a given project
 router.get('/:projectId/tasks', async (req, res) => {
   try {
@@ -133,5 +144,54 @@ async function getProject(req, res, next) {
   res.project = project;
   next();
 }
+
+// const upload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: process.env.S3_BUCKET_NAME,
+//     acl: 'public-read',
+//     metadata: (req, file, cb) => {
+//       cb(null, { fieldName: file.fieldname });
+//     },
+//     key: (req, file, cb) => {
+//       cb(null, Date.now().toString() + '-' + file.originalname);
+//     }
+//   })
+// });
+
+// File upload configuration
+const upload = multer({
+  storage: multer.memoryStorage()
+});
+
+router.post('/:id/upload', upload.single('file'), async (req, res) => {
+  try {
+    const projectId = req.params.id;
+    const file = req.file;
+    const uploadParams = {
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: Date.now().toString() + '-' + file.originalname,
+      Body: file.buffer,
+      ACL: 'public-read'
+    };
+
+    const upload = new Upload({
+      client: s3,
+      params: uploadParams
+    });
+
+    const data = await upload.done();
+
+    // Save file information to the database and return the file path
+    const project = await Project.findById(projectId);
+    project.attachments.push(data.Location);
+    await project.save();
+
+    res.json({ location: data.Location });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).send('Error uploading file');
+  }
+});
 
 module.exports = router;

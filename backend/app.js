@@ -16,6 +16,8 @@ const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 
+require('dotenv').config();
+
 const app = express();
 const server = http.createServer(app); // Create an HTTP server instance
 const io = socketIo(server, {
@@ -57,8 +59,11 @@ app.use("/auth", require("./routes/auth"));
 app.use("/user", require("./routes/user"));
 app.use("/projects", require("./routes/project"));
 app.use("/tasks", require("./routes/tasks"));
+app.use("/files", require("./routes/file"));
 app.use('/notifications', require('./routes/notifications'));
 app.use('/api/performance', require('./routes/performance'));
+app.use('/api/reports', require('./routes/reports'));
+app.use('/api/search', require('./routes/search'));
 
 // Socket.io integration
 io.on('connection', (socket) => {

@@ -43,6 +43,9 @@ const ProjectSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Task'
   }],
+  attachments: [{
+    type: String // URL to the file stored in S3
+  }],
   createdAt: {
     type: Date,
     default: Date.now

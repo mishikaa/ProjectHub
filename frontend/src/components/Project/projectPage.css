@@ -1,7 +1,7 @@
 .project-page {
   padding: 20px;
-  height: 90vh;
-  background-color: #f9f9f9;
+  background-color: #f3f4f6;
+  color: #333;
 }
 
 .heading {
@@ -12,24 +12,37 @@
   text-transform: capitalize;
 }
 
-.project-actions {
+.project-actions,
+.file-upload-section,
+.task-form {
   margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.project-actions h3 {
-  font-size: 20px;
+.project-actions h3,
+.file-upload-section h3,
+.task-form h3 {
+  font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
-.update-status-btn, .delete-project-btn, .create-task-btn {
-  margin-right: 10px;
-  margin-bottom: 10px;
+
+.update-status-btn,
+.delete-project-btn,
+.create-task-btn,
+.create-btn,
+.upload-btn {
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .update-status-btn {
@@ -51,16 +64,30 @@
   background-color: #f44336;
 }
 
+.create-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.upload-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.update-status-btn:hover,
+.delete-project-btn:hover,
+.create-task-btn:hover,
+.create-btn:hover,
+.upload-btn:hover {
+  opacity: 0.9;
+}
+
 .task-form {
   margin-top: 20px;
-  background-color: white;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
 }
 
 .task-form h3 {
-  font-size: 22px;
+  font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
@@ -74,11 +101,17 @@
   font-weight: bold;
 }
 
-.form-group input, .form-group textarea, .form-group select {
+.form-group input,
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.form-group textarea {
+  resize: vertical;
 }
 
 .form-actions {
@@ -86,18 +119,8 @@
   justify-content: flex-end;
 }
 
-.create-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .loader {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #333;
 }
@@ -107,11 +130,56 @@
 }
 
 .task-list h3 {
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-.team-member-name {
+.team-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.member-name {
   font-weight: bold;
   text-transform: capitalize;
+}
+
+.file-upload-section {
+  margin-top: 20px;
+}
+
+.file-upload-section .dropzone {
+  padding: 20px;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
+  background-color: #fafafa;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file-upload-section .dropzone:hover {
+  background-color: #f0f0f0;
+}
+
+.file-upload-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.file-upload-section ul li {
+  margin-top: 10px;
+}
+
+.project-roles ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-roles ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }

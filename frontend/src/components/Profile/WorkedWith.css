@@ -1,0 +1,31 @@
+.worked-with {
+        padding: 20px;
+      }
+      
+      .people {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .person {
+        text-align: center;
+      }
+      
+      .person img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      
+      @media (max-width: 768px) {
+        .people {
+          justify-content: center;
+        }
+      
+        .person img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      

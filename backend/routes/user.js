@@ -55,4 +55,23 @@ router.get("/all", ensureAuth, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+router.get('/profile/:id', async (req, res) => {
+  try {
+    const updatedUser = await User.findById(req.params.id);
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.put('/profile/:id', async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const API_URL = 'http://localhost:3000/projects';
 const TASKS_API_URL = 'http://localhost:3000/tasks'; // Assuming tasks endpoint
 
@@ -142,6 +144,30 @@ export const deleteTask = async (id) => {
     }
   } catch (error) {
     console.error('Error deleting task', error);
+    throw error;
+  }
+};
+
+export const uploadFile = async (projectId, formData) => {
+  const response = await axios.post(`${API_URL}/${projectId}/upload`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
+
+// Function to delete a file from a project
+export const deleteFile = async (projectId, fileUrl) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${projectId}/files`, {
+      data: { fileUrl }, // Send fileUrl as data in the request body
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.error('Error deleting file', error);
     throw error;
   }
 };

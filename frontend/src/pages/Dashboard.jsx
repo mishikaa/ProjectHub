@@ -6,6 +6,8 @@ import ProjectDetails from '../components/Project/ProjectDetails';
 import CreateProject from '../components/Project/CreateProject';
 import Performance from '../components/Dashboard/Performance';
 import CreateTask from '../components/Dashboard/CreateTask';
+import ReportGenerator from '../components/ReportGenerator';
+import Profile from './Profile';
 
 const Dashboard = () => {
   const [heading, setHeading] = useState("Projects");
@@ -18,7 +20,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    console.log("user", storedUser)
+    // console.log("user", storedUser)
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -33,11 +35,11 @@ const Dashboard = () => {
       case "Tasks":
         return <CreateTask />;
       case "WorkLogs":
-        return <div>Work Logs Component</div>;
+        return <ReportGenerator />;
       case "Performance":
         return <Performance />;
       case "Settings":
-        return <div>Settings Component</div>;
+        return <Profile />;
       default:
         return <ProjectDetails onCreateProject={handleCreateProject} />;
     }

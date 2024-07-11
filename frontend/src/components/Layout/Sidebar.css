@@ -1,11 +1,16 @@
-/* src/components/Layout/Sidebar.css */
+/* Base styles */
 .sidebar {
-  width: 200px;
+  width: 180px;
   background-color: #fff;
   padding: 20px;
   height: 100vh;
   margin-top: 4rem;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: transform 0.3s ease;
+  z-index: 1000;
 }
 
 .sidebar-logo {
@@ -45,6 +50,7 @@
 
 .main-content {
   padding: 20px;
+  margin-left: 200px; /* Adjusted to account for the fixed sidebar */
   flex-grow: 1;
   animation: fadeIn 0.5s ease;
 }
@@ -53,21 +59,61 @@
   margin: 20px 0;
 }
 
-/* Responsive styles for smaller screens */
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 180px;
+  }
+
+  .main-content {
+    margin-left: 180px;
+  }
+}
+
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
-    height: auto;
-    box-shadow: none;
+    width: 160px;
+  }
+
+  .main-content {
+    margin-left: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
   }
 
   .sidebar-menu {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
   }
 
   .sidebar-menu li {
     margin: 10px 0;
+  }
+
+  .toggle-button {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
 }
 
