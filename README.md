@@ -77,4 +77,8 @@ For any inquiries or issues, please contact [Your Name](mailto:yourname@example.
 - Ensure that you have a `LICENSE` file in your project directory with appropriate licensing information.
 - Add any additional sections or details that are relevant to your project.
 
+<<<<<<< HEAD
 This Markdown file can be saved as `README.md` in the root directory of your GitHub repository. It provides a structured and readable format to effectively communicate information about your ProjectHub project to potential users and contributors.
+=======
+This Markdown file can be saved as `README.md` in the root directory of your GitHub repository. It provides a structured and readable format to effectively communicate information about your ProjectHub project to potential users and contributors.
+>>>>>>> f9c3e8937a57c3e6389ee4d007631581c32476ac
